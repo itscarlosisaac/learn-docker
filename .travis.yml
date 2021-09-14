@@ -8,4 +8,15 @@ before_install:
 script:
   - docker run -e CI=true itscarlosisaac/learn-docker yarn test -- --collectCoverage
 
-language: generic
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "learn-docker"
+  env: "Learndocker-env"
+  bucket_name: "elasticbeanstalk-us-east-2-140458068491"
+  bucket_path: "learn-docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
