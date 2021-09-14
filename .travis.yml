@@ -1,0 +1,11 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t itscarlosisaac/learn-docker -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true itscarlosisaac/learn-docker yarn test
+
+language: generic
